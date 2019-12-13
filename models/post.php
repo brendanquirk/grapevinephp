@@ -1,6 +1,10 @@
 <?php
 
-$dbconn = pg_connect("host=postgres://aqasdomqrzexbc:3577b6f39d6fc0d2bb06fd9ad4f63cd0b46cf45fe6e84e09780b79cc0a6f1ceb@ec2-174-129-255-57.compute-1.amazonaws.com:5432/d3lldlq4sul93o dbname=postgresql-animated-10238");
+// $dbconn = pg_connect("host=postgres://aqasdomqrzexbc:3577b6f39d6fc0d2bb06fd9ad4f63cd0b46cf45fe6e84e09780b79cc0a6f1ceb@ec2-174-129-255-57.compute-1.amazonaws.com:5432/d3lldlq4sul93o dbname=postgresql-animated-10238");
+require __DIR__ . '/vendor/autoload.php';
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+echo getenv('DATABASE_URL');
 
 class Post {
   public $id;
