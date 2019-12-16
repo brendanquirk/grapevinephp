@@ -1,10 +1,22 @@
 <?php
-
-// $dbconn = pg_connect("host=postgres://aqasdomqrzexbc:3577b6f39d6fc0d2bb06fd9ad4f63cd0b46cf45fe6e84e09780b79cc0a6f1ceb@ec2-174-129-255-57.compute-1.amazonaws.com:5432/d3lldlq4sul93o dbname=postgresql-animated-10238");
-require __DIR__ . '/vendor/autoload.php';
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
-$dotenv->load();
-echo getenv('DATABASE_URL');
+$dbconn = null;
+if(getenv('DATABASE_URL')){
+    $connectionConfig = parse_url(getenv('DATABASE_URL'));
+    $host = $connectionConfig['host'];
+    $user = $connectionConfig['user'];
+    $password = $connectionConfig['pass'];
+    $port = $connectionConfig['port'];
+    $dbname = trim($connectionConfig['path'],'/');
+    $dbconn = pg_connect(
+        "host=".$host." ".
+        "user=".$user." ".
+        "password=".$password." ".
+        "port=".$port." ".
+        "dbname=".$dbname
+    );
+} else {
+    $dbconn = pg_connect("host=localhost dbname=phpapi");
+}
 
 class Post {
   public $id;
