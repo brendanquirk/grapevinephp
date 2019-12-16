@@ -1,6 +1,0 @@
-{
-    "name": "brendanquirk/grapevine_backend_brendan",
-    "require": {
-        "vlucas/phpdotenv": "^4.0"
-    }
-}
